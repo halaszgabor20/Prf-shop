@@ -13,9 +13,9 @@ const routes: Routes = [
         loadChildren: () => import("./core/auth/components/register/register.module").then(m => m.RegisterModule)
     },
     {
-        path: "home/stuff-list",
+        path: "home",
         canActivate: [AuthGuard],
-        loadChildren: () => import("./home/stuff-list/stuff-list.module").then(m => m.StuffListModule)
+        loadChildren: () => import("./home/home.module").then(m => m.HomeModule)
     },
     {
         path: "not-found",

@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="content">
+        <p class="title">Shopping Cart</p>
+        <div class="table-wrapper" *ngIf="products$ | async as products">
+            <ng-container *ngIf="products.length; else emptyCart">
+                <table class="fl-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Quality</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Remove from Cart</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of products">
+                            <td>{{ product.name }}</td>
+                            <td>{{ product.quality }}</td>
+                            <td>{{ product.quantity }} db</td>
+                            <td>{{ product.price }} Ft/kg</td>
+                            <td class="button-wrapper" (click)="removeFromCart(product._id)"><p class="delete-button">-</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ng-container>
+            <ng-template #emptyCart>
+                <p class="empty-cart">Your cart is empty</p>
+            </ng-template>
+        </div>
+    </div>
+</div>

@@ -1,18 +1,12 @@
 const express = require("express");
-const passport = require("passport");
 const router = express.Router();
 const StuffController = require("../controllers/stuff.controller");
+const CheckAuth = require("../middleware/check-auth");
 
-router.get(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  StuffController.getStuff
-);
-router.post(
-  "/create",
-  passport.authenticate("jwt", { session: false }),
-  StuffController.createStuff
-);
-// router.get("/:id", passport.authenticate("jwt", { session: false }), StuffController.getStuffById);
+router.get("/get-products", CheckAuth, StuffController.getStuff);
+router.get("/get-cart", CheckAuth, StuffController.getCart);
+router.post("/create", CheckAuth, StuffController.createStuff);
+router.post("/add-to-cart", CheckAuth, StuffController.addToCart);
+router.delete("/remove-from-cart/:productId?", CheckAuth, StuffController.removeFromCart);
 
 module.exports = router;

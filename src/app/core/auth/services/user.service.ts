@@ -4,7 +4,7 @@ import { FormGroup } from "@angular/forms";
 import { environment } from "src/environments/environment";
 import { UserData } from "../models/user-data";
 import { BehaviorSubject, Observable, of } from "rxjs";
-import { catchError, map, switchMap } from "rxjs/operators";
+import { catchError, map } from "rxjs/operators";
 import { UserUtils } from "../utils/user.utils";
 import { LoadingService } from "./loading.service";
 import { Router } from "@angular/router";
@@ -40,7 +40,9 @@ export class UserService {
                     return of(error);
                 })
             )
-            .subscribe(_ => this.router.navigate(["/home/stuff-list"]));
+            .subscribe(_ => {
+                this.router.navigate(["/home/products"]);
+            });
     }
 
     public register(form: FormGroup): void {
@@ -52,10 +54,13 @@ export class UserService {
             })
             .subscribe(_ => {
                 this.loadingService.loadingSubject.next(false);
+                this.router.navigate(["/login"]);
             });
     }
 
-    public getToken(): string {
-        return JSON.parse(localStorage.getItem("userData"));
+    public logout(): void {
+        localStorage.clear();
+        this.currentUserSubject.next(null);
+        this.router.navigate(["/login"]);
     }
 }

@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
+import { UserService } from "src/app/core/auth/services/user.service";
 
 @Component({
     selector: "app-not-found",
@@ -7,9 +8,13 @@ import { Router } from "@angular/router";
     styleUrls: ["./not-found.component.scss"]
 })
 export class NotFoundComponent {
-    constructor(private readonly router: Router) {}
+    constructor(private readonly router: Router, private readonly userService: UserService) {}
 
     goBack() {
-        this.router.navigate(["/"]);
+        let newRoute = "/";
+        if (this.userService.currentUserValue?.userId) {
+            newRoute = "/home/products";
+        }
+        this.router.navigate([newRoute]);
     }
 }
