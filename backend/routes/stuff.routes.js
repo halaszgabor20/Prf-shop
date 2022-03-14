@@ -8,5 +8,6 @@ router.get("/get-cart", CheckAuth, StuffController.getCart);
 router.post("/create", CheckAuth, StuffController.createStuff);
 router.post("/add-to-cart", CheckAuth, StuffController.addToCart);
 router.delete("/remove-from-cart/:productId?", CheckAuth, StuffController.removeFromCart);
+router.delete("/remove-all", CheckAuth, StuffController.removeAllItemsFromCart);
 
 module.exports = router;

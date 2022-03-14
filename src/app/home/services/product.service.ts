@@ -55,4 +55,20 @@ export class ProductService {
             )
             .subscribe();
     }
+
+    public removeAllItemsFromCart(): void {
+        if (this.cartSubject.value.length > 0) {
+            this.http
+                .delete(environment.backendURL + "/api/stuff/remove-all")
+                .pipe(
+                    tap(_ => {
+                        this.cartSubject.next([]);
+                    }),
+                    catchError(error => {
+                        return of(error);
+                    })
+                )
+                .subscribe();
+        }
+    }
 }

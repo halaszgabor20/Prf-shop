@@ -13,12 +13,19 @@
         min-width: 400pt;
         padding-top: 80pt;
         margin: 0 auto;
-        .title {
-            font-weight: bold;
-            font-size: 24pt;
-            color: #ffffff;
-            margin-bottom: 32pt;
-            height: 24pt;
+        .title-section {
+            display: flex;
+            .title {
+                font-weight: bold;
+                font-size: 24pt;
+                color: #ffffff;
+                margin-bottom: 32pt;
+                height: 24pt;
+            }
+            .common-button {
+                margin-left: 18pt;
+                margin-top: 8pt;
+            }
         }
         .empty-cart {
             font-weight: bold;

@@ -8,18 +8,18 @@ import { ProductService } from "../services/product.service";
     templateUrl: "./cart.component.html",
     styleUrls: ["./cart.component.scss"]
 })
-export class CartComponent implements OnInit {
+export class CartComponent {
     public products$: Observable<ProductData[]>;
 
     constructor(private readonly productService: ProductService) {
         this.products$ = this.productService.cart$;
     }
 
-    public ngOnInit(): void {
-        this.productService.loadCart().subscribe();
-    }
-
     public removeFromCart(productId: string): void {
         this.productService.removeProductFromCart(productId);
+    }
+
+    public removeAllItems(): void {
+        this.productService.removeAllItemsFromCart();
     }
 }

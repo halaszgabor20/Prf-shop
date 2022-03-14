@@ -115,3 +115,18 @@ exports.removeFromCart = async (req, res, next) => {
         res.status(500).send();
     }
 };
+
+exports.removeAllItemsFromCart = async (req, res, next) => {
+    try {
+        const fetchedUser = await User.findOne({ _id: req.userData.userId });
+        if (!fetchedUser) {
+            return res.status(401).send();
+        }
+
+        await Cart.deleteMany({ userId: fetchedUser._id });
+
+        return res.status(200).send();
+    } catch (error) {
+        res.status(500).send();
+    }
+};

@@ -10,7 +10,7 @@ import { UserService } from "src/app/core/auth/services/user.service";
 export class NotFoundComponent {
     constructor(private readonly router: Router, private readonly userService: UserService) {}
 
-    goBack() {
+    public goBack(): void {
         let newRoute = "/";
         if (this.userService.currentUserValue?.userId) {
             newRoute = "/home/products";
